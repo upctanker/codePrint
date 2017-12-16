@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from .codePrintSetting import HOST_IP
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'bil_ts!ls@dbcaa-tejx#na)l!qdwft^cam7%8%y90a+)%01%d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.185.101"]
+ALLOWED_HOSTS = [HOST_IP]
 
 
 # Application definition

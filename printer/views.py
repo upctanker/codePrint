@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from .models import UserInfo
 import datetime
 import os
-# Create your views here.
+from print.codePrintSetting import ADPASSWORD,PRINTER_NAME,CODE_PATH
+# Create your views here
 
-ADPASSWORD = "" 
 def index(request):
     if request.method == "GET":
         try:
@@ -20,8 +20,6 @@ def index(request):
         code = request.POST['code']
         try:
             users = UserInfo.objects.get(team=team)
-            print("rrr",team,password)
-            print("rrrd",users.password)
             if users.password != password:
                 print("--"+password+"--"+users.password+"--")
                 raise UserInfo.DoesNotExist
@@ -36,12 +34,12 @@ def index(request):
 def printcode(team,seat,code):
     now = datetime.datetime.now()
     tmark = now.strftime("%H%M%S")
-    fpath = "/home/wsc500/ccpcprint/codes/"+team+"-"+tmark+".print"
+    fpath = CODE_PATH+team+"-"+tmark+".print"
     f = open(fpath,"w")
     f.write("Seat: "+seat+"\t"+"Team: "+team+"\t"+now.strftime("%H:%M:%S")+"\n"+code+"\n")
     f.write("------------------End------------------")
     f.close()
-    os.system("cat "+fpath+" | lp -d HP-LaserJet-P3010-Series")
+    os.system("cat "+fpath+" | lp -d "+PRINTER_NAME)
 
 
 def adminpage(request):

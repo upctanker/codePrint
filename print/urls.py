@@ -16,9 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from printer import views as views
+from print.codePrintSetting import SHOW_ADMIN_PAGE
 urlpatterns = [
 # url(r'^admin/', admin.site.urls),
+    url(r'^$',views.index),
     url(r'^print/$', views.index),
-    url(r'^cool/$',views.adminpage),
-    url(r'^cool/deleteall/$',views.delAction),
 ]
+
+if SHOW_ADMIN_PAGE:
+    urlpatterns += [
+        url(r'^cool/$',views.adminpage),
+        url(r'^cool/deleteall/$',views.delAction),
+    ]
