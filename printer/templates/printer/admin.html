@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>CCPC Print</title>
+    <link href="{% static "printer/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "printer/sticky-footer-navbar.css" %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Print Admin</a>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- Begin page content -->
+    <div class="container">
+<div class="row">
+  <div class="col-md-6">
+    <form class="form-horizontal" action="" method="post" style="margin-top:30px;">
+      {% csrf_token %}
+      {% if status == "waiting" %}
+
+      {% elif status == "wrong" %}
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+          <div class="alert alert-danger" role="alert">密码错误!</div>
+        </div>
+      </div>
+      {% elif status == "success" %}
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+          <div class="alert alert-success" role="alert">添加成功!</div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Admin Password</label>
+        <div class="col-sm-10">
+          <input type="password" name="password" class="form-control" id="team" name="team" placeholder="123">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Team List(队名 座位 密码，一个一行)</label>
+        <div class="col-sm-10">
+          <textarea class="form-control"  name="info" rows="25" cols="80" placeholder ="team01 A01 xxxxxxx
+team02 A02 xxxxxxx
+..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" >Submit</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Seat</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for team in userlist %}
+        <tr>
+          <td>{{team.team}}</td>
+          <td>{{team.seat}}</td>
+          <td>{{team.password}}</td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+    <form class="form-inline" method="post" action='deleteall/'>
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputName2">Admin Password</label>
+        <input type="password" class="form-control" id="password" name="password" >
+      </div>
+      <button type="submit" class="btn btn-danger">Delete All Info</button>
+    </form>
+
+  </div>
+</div>
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        
+        <p class="text-muted">CCPC Final 2017 @ HIT</p>
+      </div>
+    </footer>
+
+
+    <script src="{% static "printer/jquery.min.js" %}"></script>
+    <script src="{% static "printer/bootstrap.min.js" %}"></script>
+  </body>
+</html>
