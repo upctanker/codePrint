@@ -44,11 +44,23 @@ SHOW_ADMIN_PAGE = True
 
 此时在浏览器输入打印服务器的ip地址即可访问打印系统。
 
-当`SHOW_ADMIN_PAGE`开启时，可以访问http://HOST_IP/cool 进入管理页面，用于配置每个队伍的账号密码。务必在配置完成后关闭`SHOW_ADMIN_PAGE`
+当`SHOW_ADMIN_PAGE`开启时，可以访问 http://HOST_IP/cool 进入管理页面，用于配置每个队伍的账号密码。务必在配置完成后关闭`SHOW_ADMIN_PAGE`
 
-http://HOST_IP 或 http://HOST_IP/print 是提交打印的页面
+http://HOST_IP 或 http://HOST_IP/print 是选手提交打印的页面
 
-`printer/templates/printer/index.html`是打印页面，如果要修改页面内的文字可以直接在这里修改
+## 代码结构
+
+标准的django项目结构
+
+`printer/templates/printer/index.html`是打印页面前端，如果要修改页面内的文字可以直接在这里修改
+
+`printer/templates/printer/admin.html`是管理页面前端
+
+`printer/views.py`是所有后端逻辑
+
+`print/urls.py`是路由配置
+
+
 
 所有提交的代码都会存放在`CODE_PATH`下，命名格式为`队名-时间.print`
 
@@ -57,4 +69,5 @@ http://HOST_IP 或 http://HOST_IP/print 是提交打印的页面
 * 打印中文会有乱码，但是一般现场赛中没人去写中文注释，所以影响不大。
 * 这里直接使用了django的runserver作为服务器，没有配置nginx或apache，并且setting.py的debug=true也没有关掉。考虑到现场赛的打印系统是局域网环境，而且比赛期间也不太会有人做坏事，所以这样是最方便的做法。
 * 这个系统经过2017年CCPCFinal现场赛的测试，完全扛得住几百支队伍的提交。
+* 如果有问题请提Issues，也欢迎贡献Pull Request！
 
