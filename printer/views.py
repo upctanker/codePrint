@@ -36,10 +36,10 @@ def printcode(team,seat,code):
     tmark = now.strftime("%H%M%S")
     fpath = CODE_PATH+team+"-"+tmark+".print"
     f = open(fpath,"w")
-    f.write("Seat: "+seat+"\t"+"Team: "+team+"\t"+now.strftime("%H:%M:%S")+"\n"+code+"\n")
+    f.write("Seat: "+seat+"\t"+"Team: "+team+"\t"+now.strftime("%H:%M:%S")+"\n"+"--------------------------------------------\n"+code+"\n")
     f.write("------------------End------------------")
     f.close()
-    os.system("cat "+fpath+" | lp -d "+PRINTER_NAME)
+    os.system("cat "+fpath+" | paps --font=10 --top-margin=10  --bottom-margin=10 --lpi=10 |lp -d "+PRINTER_NAME)
 
 
 def adminpage(request):
