@@ -11,9 +11,11 @@
 ```
 sudo apt-get install python3-pip
 pip3 install django
+sudo apt-get install paps
 git clone https://github.com/wsc500/codePrint.git
 cd codePrint
 ```
+paps 用于支持中文打印
 
 ### 2.修改配置文件
 编辑print/codePrintSetting.py
@@ -66,7 +68,7 @@ http://HOST_IP 或 http://HOST_IP/print 是选手提交打印的页面
 
 ## 其他说明
 
-* 打印中文会有乱码，但是一般现场赛中没人去写中文注释，所以影响不大。
+* 支持中文打印
 * 这里直接使用了django的runserver作为服务器，没有配置nginx或apache，并且setting.py的debug=true也没有关掉。考虑到现场赛的打印系统是局域网环境，而且比赛期间也不太会有人做坏事，所以这样是最方便的做法。
 * 这个系统经过2017年CCPCFinal现场赛的测试，完全扛得住几百支队伍的提交。
 * 如果有问题请提Issues，也欢迎贡献Pull Request！
